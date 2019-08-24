@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <th:block th:replace="includes/CommonScripts::head-css"></th:block>
+
+</head>
+<body>
+<th:block th:replace="includes/CommonScripts::header"></th:block>
+
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" aria-describedby="nameHelp" placeholder="Enter username">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+
+<th:block th:replace="includes/CommonScripts::end-of-body"></th:block>
+</body>
+</html>
