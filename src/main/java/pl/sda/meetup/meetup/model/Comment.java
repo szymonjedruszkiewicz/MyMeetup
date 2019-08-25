@@ -1,34 +1,25 @@
 package pl.sda.meetup.meetup.model;
-
-
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-public class Event {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;
-
     private String description;
-
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
-
-    private LocalDateTime start;
-
-    private LocalDateTime end;
-
+    @ManyToOne
+    @JoinColumn(name="eventId")
+    private Event event;
+    private LocalDateTime dateOfCreation;
 
 }

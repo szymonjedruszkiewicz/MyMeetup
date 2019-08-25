@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Register Form</title>
-    <th:block th:replace="includes/CommonScripts::head-css"></th:block>
+    <div th:replace="includes/CommonScripts::head-css"></div>
 </head>
 <body>
-<th:block th:replace="includes/CommonScripts::header"></th:block>
+<div th:replace="includes/CommonScripts::header"></div>
 
 <form th:action="@{/register}" th:object="${userDTO}" method="post">
     <table>
         <tr>
             <td>Email:</td>
             <td><input type="email" th:field="*{email}"/></td>
-            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            <td th:errors="*{email}"></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td><input type="password" th:field="*{password}"/></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+            <td th:errors="*{password}"></td>
         </tr>
         <tr>
             <td>Username:</td>
             <td><input type="text" th:field="*{username}"/></td>
-            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+            <td th:errors="*{username}"></td>
         </tr>
         <tr>
             <td>
@@ -34,6 +34,6 @@
 </form>
 
 
-<th:block th:replace="includes/CommonScripts::end-of-body"></th:block>
+<div th:replace="includes/CommonScripts::end-of-body"></div>
 </body>
 </html>

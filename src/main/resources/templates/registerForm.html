@@ -13,17 +13,17 @@
         <tr>
             <td>Email:</td>
             <td><input type="email" th:field="*{email}"/></td>
-            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            <td th:errors="*{email}"></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td><input type="password" th:field="*{password}"/></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+            <td th:errors="*{password}"></td>
         </tr>
         <tr>
             <td>Username:</td>
             <td><input type="text" th:field="*{username}"/></td>
-            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+            <td th:errors="*{username}"></td>
         </tr>
         <tr>
             <td>
