@@ -4,8 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import pl.sda.meetup.meetup.model.User;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Builder
@@ -14,13 +17,18 @@ import java.time.LocalDateTime;
 @Setter
 public class EventDto {
 
+    @NotBlank(message = "not blank")
+    @NotNull(message = "not null")
     private String title;
 
+    @Size(min = 20, message = "min 20 letters")
     private String description;
 
-    private User user;
+    private UserDto userDto;
 
+    @Future(message = "wrong date")
     private LocalDateTime start;
 
+    @Future(message = "wrong date")
     private LocalDateTime end;
 }

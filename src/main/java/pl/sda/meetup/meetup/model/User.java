@@ -3,8 +3,8 @@ package pl.sda.meetup.meetup.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -13,13 +13,26 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "email")
     private String email;
-    private String password;
+
+    @Column(name = "password_hash")
+    private String passwordHash;
+
     @OneToMany(mappedBy = "user")
-    private List<Event> events = new ArrayList<>();
+    private Set<Event> events = new HashSet<>();
+
+    @ManyToMany
+    private Set<Role> roles = new HashSet<>();
+
+
 }
 

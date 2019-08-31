@@ -9,7 +9,7 @@ public class ManualEventMapper {
         return EventDto.builder()
                 .title(event.getTitle())
                 .description(event.getDescription())
-                .user(event.getUser())
+//                .userDto(event.getUser())
                 .start(event.getStart())
                 .end(event.getEnd())
                 .build();
@@ -20,7 +20,7 @@ public class ManualEventMapper {
         return Event.builder()
                 .title(eventDto.getTitle())
                 .description(eventDto.getDescription())
-                .user(eventDto.getUser())
+//                .user(eventDto.getUser())
                 .start(eventDto.getStart())
                 .end(eventDto.getEnd())
                 .build();
