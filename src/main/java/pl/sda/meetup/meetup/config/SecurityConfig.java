@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
-                .failureForwardUrl("/login?error=true");
+                .failureUrl("/login?error=true");
     }
 
     @Override

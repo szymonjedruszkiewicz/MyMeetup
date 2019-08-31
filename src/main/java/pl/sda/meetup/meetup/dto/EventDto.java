@@ -1,9 +1,7 @@
 package pl.sda.meetup.meetup.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +13,8 @@ import java.time.LocalDateTime;
 @Data
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventDto {
 
     @NotBlank(message = "not blank")
@@ -27,8 +27,10 @@ public class EventDto {
     private UserDto userDto;
 
     @Future(message = "wrong date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime start;
 
     @Future(message = "wrong date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime end;
 }

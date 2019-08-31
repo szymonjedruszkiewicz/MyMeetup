@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Form</title>
+    <div th:replace="includes/CommonScripts::head-css"></div>
+</head>
+<body>
+<div th:replace="includes/CommonScripts::header"></div>
+
+<form th:action="@{/event/add}" th:object="${eventDto}" method="post">
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{title}"/></td>
+            <td th:errors="*{title}"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <td th:errors="*{description}"></td>
+        </tr>
+        <tr>
+            <td>Start time:</td>
+            <td><input type="date" th:field="*{start}"/></td>
+            <td th:errors="*{start}"></td>
+        </tr>
+        <tr>
+            <td>Finish time:</td>
+            <td><input type="date" th:field="*{end}"/></td>
+            <td th:errors="*{end}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<div th:replace="includes/CommonScripts::end-of-body"></div>
+</body>
+</html>

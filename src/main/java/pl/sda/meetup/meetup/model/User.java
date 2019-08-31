@@ -33,6 +33,10 @@ public class User {
     @ManyToMany
     private Set<Role> roles = new HashSet<>();
 
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
 
 }
 
