@@ -4,10 +4,7 @@ package pl.sda.meetup.meetup.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -21,7 +18,6 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String title;
 
     private String description;
@@ -30,9 +26,9 @@ public class Event {
     @JoinColumn(name = "userId")
     private User user;
 
-    private LocalDateTime start;
+    private LocalDate start;
 
-    private LocalDateTime end;
+    private LocalDate end;
 
 
 }

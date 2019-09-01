@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/event/add").authenticated()
                 .anyRequest().permitAll()
                 .and().csrf().disable()
                 .formLogin()
@@ -42,8 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select u.email, u.password_hash, 1 from user u where u.email = ?")
                 .authoritiesByUsernameQuery("select u.email, r.role_name " +
                         "from user u " +
-                        "left join user_role ur on u.id = ur.id " +
-                        "left join role r on ur.id = r.id " +
+                        "left join user_roles ur on u.id = ur.user_id " +
+                        "left join role r on ur.roles_id = r.id " +
                         "where u.email = ?")
                 .passwordEncoder(passwordEncoder);
     }

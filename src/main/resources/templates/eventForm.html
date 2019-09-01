@@ -22,12 +22,12 @@
         </tr>
         <tr>
             <td>Start time:</td>
-            <td><input type="date" th:field="*{start}"/></td>
+            <td><input type="text" th:field="*{start}" placeholder="yyyy/mm/dd"/></td>
             <td th:errors="*{start}"></td>
         </tr>
         <tr>
             <td>Finish time:</td>
-            <td><input type="date" th:field="*{end}"/></td>
+            <td><input type="text" th:field="*{end}" placeholder="yyyy/mm/dd"/></td>
             <td th:errors="*{end}"></td>
         </tr>
         <tr>

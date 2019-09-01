@@ -7,6 +7,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -27,10 +28,10 @@ public class EventDto {
     private UserDto userDto;
 
     @Future(message = "wrong date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDateTime start;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate start;
 
     @Future(message = "wrong date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDateTime end;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate end;
 }
