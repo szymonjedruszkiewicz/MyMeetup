@@ -4,15 +4,13 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>index</title>
+    <title>Search Results</title>
     <th:block th:replace="~{includes/CommonScripts :: head-css}"> </th:block>
 </head>
 <body>
 <div th:replace="~{includes/CommonScripts::header}"></div>
-<h1>Bieda Meetup says hello</h1>
 
-
-<table class="table" th:object="${events}" >
+<table class="table" th:object="${results}" >
     <thead class="thead-light">
     <tr>
         <th> Title </th>
@@ -21,17 +19,15 @@
         <th> End Date </th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:if="${events.isEmpty()}">
+      <tbody>
+    <tr th:if="${results.isEmpty()}">
         <td colspan="2"> No Events Available </td>
     </tr>
-    <tr th:each="event : ${events}">
-        <td><span th:text="${event.getTitle()}" > Title </span></td>
+    <tr th:each="event : ${results}">
+        <td><span th:text="${event.getTitle()}"> Title </span></td>
         <td><span th:text="${event.getDescription()}"> Description </span></td>
         <td><span th:text="${event.getStart()}"> Start Date </span></td>
         <td><span th:text="${event.getEnd()}"> End Date </span></td>
-        <td><a th:href="@{'/event/' + ${event.getId()}}">show details</a></td>
-
     </tr>
     </tbody>
 </table>

@@ -1,26 +1,35 @@
 package pl.sda.meetup.meetup.mapper.manual;
 
+import org.springframework.stereotype.Component;
 import pl.sda.meetup.meetup.dto.EventDto;
 import pl.sda.meetup.meetup.model.Event;
 
+@Component
 public class ManualEventMapper {
 
-    public static EventDto eventToEventDto(Event event) {
+    private final ManualUserMapper manualUserMapper;
+
+    public ManualEventMapper(ManualUserMapper manualUserMapper) {
+        this.manualUserMapper = manualUserMapper;
+    }
+
+
+    public EventDto eventToEventDto(Event event) {
         return EventDto.builder()
                 .title(event.getTitle())
                 .description(event.getDescription())
-//                .userDto(event.getUser())
+                .userDto(manualUserMapper.userToUserDto(event.getUser()))
                 .start(event.getStart())
                 .end(event.getEnd())
+                .id(event.getId())
                 .build();
     }
 
 
-    public static Event eventDtoToEvent(EventDto eventDto) {
+    public Event eventDtoToEvent(EventDto eventDto) {
         return Event.builder()
                 .title(eventDto.getTitle())
                 .description(eventDto.getDescription())
-//                .user()
                 .start(eventDto.getStart())
                 .end(eventDto.getEnd())
                 .build();

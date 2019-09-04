@@ -12,6 +12,30 @@
 <h1>Bieda Meetup says hello</h1>
 
 
+<table class="table" th:object="${events}" >
+    <thead class="thead-light">
+    <tr>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Start Date </th>
+        <th> End Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${events.isEmpty()}">
+        <td colspan="2"> No Events Available </td>
+    </tr>
+    <tr th:each="event : ${events}">
+        <td><span th:text="${event.getTitle()}" > Title </span></td>
+        <td><span th:text="${event.getDescription()}"> Description </span></td>
+        <td><span th:text="${event.getStart()}"> Start Date </span></td>
+        <td><span th:text="${event.getEnd()}"> End Date </span></td>
+        <td><a th:href="@{'/event/' + ${event.getId()}}">show details</a></td>
+
+    </tr>
+    </tbody>
+</table>
+
 
 <th:block th:replace="~{includes/CommonScripts :: end-of-body}"> </th:block>
 </body>

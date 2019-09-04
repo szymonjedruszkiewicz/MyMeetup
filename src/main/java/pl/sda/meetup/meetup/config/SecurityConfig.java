@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/event/add").authenticated()
                 .anyRequest().permitAll()
-                .and().csrf().disable()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login-process-2")

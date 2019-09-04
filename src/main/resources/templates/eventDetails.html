@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Event Details</title>
+    <th:block th:replace="~{includes/CommonScripts :: head-css}"></th:block>
+</head>
+<body>
+<div th:replace="~{includes/CommonScripts::header}"></div>
+
+
+<table class="table" th:object="${event}">
+    <thead class="thead-light">
+    <tr>
+        <th> Title</th>
+        <th> Description</th>
+        <th> Start Date</th>
+        <th> End Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td><span th:text="${event.getTitle()}"> Title </span></td>
+    <td><span th:text="${event.getDescription()}"> Description </span></td>
+    <td><span th:text="${event.getStart()}"> Start Date </span></td>
+    <td><span th:text="${event.getEnd()}"> End Date </span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<table class="table" th:object="${commentList}" >
+    <thead class="thead-light">
+    <tr>
+        <th> User </th>
+        <th> Description </th>
+        <th>  Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${commentList.isEmpty()}">
+        <td colspan="2"> No Comments Available </td>
+    </tr>
+    <tr th:each="comment : ${commentList}">
+        <td><span th:text="${comment.getUserDto().username}" > Title </span></td>
+        <td><span th:text="${comment.getDescription()}"> Description </span></td>
+        <td><span th:text="${comment.getDateOfCreation()}"> Date </span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<div sec:authorize="isAuthenticated()">
+<form th:action="@{/event/__${id}__}" th:object="${commentDto}" method="post">
+    <table>
+        <tr>
+            <td>Comment:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <td th:errors="*{description}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<th:block th:replace="~{includes/CommonScripts :: end-of-body}"></th:block>
+</body>
+</html>

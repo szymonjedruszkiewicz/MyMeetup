@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class EventDto {
 
+    private Long id;
+
     @NotBlank(message = "not blank")
     @NotNull(message = "not null")
     private String title;

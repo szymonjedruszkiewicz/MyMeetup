@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <th:block th:fragment="head-css" th:remove="tag">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -11,14 +11,36 @@
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a th:if="${@userContextService.getLoggedUserName() == null}" class="nav-link" href="/register">Register</a>
+                    <a sec:authorize="!isAuthenticated()" class="nav-link" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a th:if="${@userContextService.getLoggedUserName() == null}" class="nav-link" href="/login">Login</a>
+                    <a sec:authorize="!isAuthenticated()" class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a th:if="${@userContextService.getLoggedUserName() != null}"
-                       th:text="'zalogowany jako ' + ${@userContextService.getLoggedUserName()}" class="text-light"></a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/event/add">Add event</a>
+                </li>
+                <li>
+
+                </li>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
+                    <!-- Search form -->
+                    <div class="md-form mt-0">
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" th:value="${q}" name="q">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="type">Wybierz: </label>
+                        <select class="form-control" id="type" name="type" th:value="${type}" >
+                            <option value="all">Wszystkie</option>
+                            <option value="future">Przyszłe</option>
+                            <option value="current_and_future">Trwające i przyszłe</option>
+                        </select>
+                    </div>
+                </form>
+                <li class="nav-item">
+                    <span class="text-light" sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+<!--                    <a th:if="${@userContextService.getLoggedUserName() != null}"-->
+<!--                       th:text="'zalogowany jako ' + ${@userContextService.getLoggedUserName()}" class="text-light"></a>-->
                 </li>
             </ul>
         </div>
