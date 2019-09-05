@@ -12,15 +12,7 @@ import pl.sda.meetup.meetup.service.UserService;
 @Slf4j
 public class LoginController {
 
-    private final UserService userService;
-    private final UserContextService userContextService;
-
-    public LoginController(UserService userService, UserContextService userContextService) {
-        this.userService = userService;
-        this.userContextService = userContextService;
-    }
-
-    @GetMapping("/login")
+     @GetMapping("/login")
     public String showLoginPage() {
         return "loginForm";
     }

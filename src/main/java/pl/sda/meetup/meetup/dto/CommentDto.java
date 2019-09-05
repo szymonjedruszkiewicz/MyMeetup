@@ -1,9 +1,9 @@
 package pl.sda.meetup.meetup.dto;
 
 import lombok.*;
-import pl.sda.meetup.meetup.model.Event;
-import pl.sda.meetup.meetup.model.User;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Builder
@@ -12,8 +12,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CommentDto {
 
+    @Min(10)
+    @Max(500)
     private String description;
 
     private UserDto userDto;

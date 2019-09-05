@@ -18,7 +18,6 @@ public class ManualEventMapper {
         return EventDto.builder()
                 .title(event.getTitle())
                 .description(event.getDescription())
-                .userDto(manualUserMapper.userToUserDto(event.getUser()))
                 .start(event.getStart())
                 .end(event.getEnd())
                 .id(event.getId())

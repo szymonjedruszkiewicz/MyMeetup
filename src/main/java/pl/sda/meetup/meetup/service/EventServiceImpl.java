@@ -3,6 +3,7 @@ package pl.sda.meetup.meetup.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.sda.meetup.meetup.dto.EventDto;
+import pl.sda.meetup.meetup.exception.NoEventException;
 import pl.sda.meetup.meetup.mapper.manual.ManualEventMapper;
 import pl.sda.meetup.meetup.model.Event;
 import pl.sda.meetup.meetup.model.User;
@@ -51,9 +52,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventDto> getSearchResults(String query, String type) {
-        List<Event> queryResult = eventRepository.findAll().stream()
-                .filter(event -> event.getTitle().contains(query))
-                .collect(Collectors.toList());
+
+        List<Event> queryResult = eventRepository.findEventsByTitleContains(query);
 
         switch (type) {
             case "future":
@@ -71,7 +71,7 @@ public class EventServiceImpl implements EventService {
                         .map(manualEventMapper::eventToEventDto)
                         .collect(Collectors.toList());
             default:
-                throw new RuntimeException("no such Events");
+                throw new NoEventException("no such Events found in db");
         }
 
 
@@ -79,7 +79,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto findEventById(Long id) {
-        Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException("no such event"));
+        Event event = eventRepository.findById(id).orElseThrow(() -> new NoEventException("No event of id: " + id + " found in db"));
         return manualEventMapper.eventToEventDto(event);
     }
 }

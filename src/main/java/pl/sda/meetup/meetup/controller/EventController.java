@@ -1,11 +1,15 @@
 package pl.sda.meetup.meetup.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.meetup.meetup.dto.CommentDto;
 import pl.sda.meetup.meetup.dto.EventDto;
+import pl.sda.meetup.meetup.dto.UserDto;
+import pl.sda.meetup.meetup.exception.NoUserException;
+import pl.sda.meetup.meetup.exception.UserExistsException;
 import pl.sda.meetup.meetup.mapper.manual.ManualUserMapper;
 import pl.sda.meetup.meetup.model.User;
 import pl.sda.meetup.meetup.service.CommentService;
@@ -14,10 +18,11 @@ import pl.sda.meetup.meetup.service.UserContextService;
 import pl.sda.meetup.meetup.service.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class EventController {
 
     private final UserContextService userContextService;
@@ -46,7 +51,6 @@ public class EventController {
             return "eventForm";
         }
         eventService.saveEvent(eventDto);
-
         return "redirect:/index";
     }
 
@@ -63,7 +67,6 @@ public class EventController {
 
     @GetMapping("/event/{id}")
     public String showDetailedEvent(@PathVariable String id, Model model) {
-
         model.addAttribute("event", eventService.findEventById(Long.valueOf(id)));
         model.addAttribute("id", id);
         model.addAttribute("commentList", commentService.getCommentByEvent(Long.valueOf(id)));
@@ -72,17 +75,23 @@ public class EventController {
     }
 
     @PostMapping("/event/{id}")
-    public String postComment(@PathVariable String id, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult) {
+    public String postComment(@PathVariable String id, @ModelAttribute @Valid CommentDto commentDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "eventDetails";
         }
-
-
-
-        return "redirect:/index";
-
-
+        EventDto eventById = eventService.findEventById(Long.valueOf(id));
+        model.addAttribute("event", eventById);
+        model.addAttribute("id", id);
+        model.addAttribute("commentList", commentService.getCommentByEvent(Long.valueOf(id)));
+        User user = userService.findUserByEmail(userContextService.getLoggedUserName())
+                .orElse(userService.findUserByEmail("admin@sda.pl")
+                        .orElseThrow(() -> new NoUserException("user not found in DB")));
+        UserDto userDto = manualUserMapper.userToUserDto(user);
+        commentDto.setUserDto(userDto);
+        commentDto.setEventDto(eventById);
+        commentDto.setDateOfCreation(LocalDateTime.now());
+        commentService.saveComment(commentDto);
+        return "redirect:/event/" + id;
     }
-
 
 }

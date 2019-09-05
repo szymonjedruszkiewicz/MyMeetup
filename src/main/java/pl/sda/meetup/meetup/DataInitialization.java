@@ -21,7 +21,7 @@ import java.util.*;
 @Slf4j
 @Component
 //TODO FlyWay
-public class DataInitialization implements ApplicationListener<ContextRefreshedEvent> {
+public class DataInitialization  {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -37,7 +37,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         this.commentRepository = commentRepository;
     }
 
-    @Override
+//    @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         Role adminRole = Role.builder()
                 .id(1L)
