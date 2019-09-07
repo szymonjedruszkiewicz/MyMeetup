@@ -8,4 +8,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     List<Comment> findByEvent_IdOrderByDateOfCreation(Long eventId);
+
+    List<Comment> findByEvent_IdOrderByDateOfCreationDesc(Long eventId);
 }

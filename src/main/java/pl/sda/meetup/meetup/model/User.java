@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class User {
 
     @Id
@@ -25,12 +26,15 @@ public class User {
     private String email;
 
     @Column(name = "password_hash")
+    @ToString.Exclude
     private String passwordHash;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private Set<Event> events = new HashSet<>();
 
     @ManyToMany
+    @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
 
     public void addRole(Role role) {

@@ -82,4 +82,6 @@ public class EventServiceImpl implements EventService {
         Event event = eventRepository.findById(id).orElseThrow(() -> new NoEventException("No event of id: " + id + " found in db"));
         return manualEventMapper.eventToEventDto(event);
     }
+
+
 }

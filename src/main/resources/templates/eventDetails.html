@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
 
@@ -30,43 +31,67 @@
 </table>
 <br>
 
-<table class="table" th:object="${commentList}" >
+<table class="table" th:object="${commentList}">
     <thead class="thead-light">
     <tr>
-        <th> User </th>
-        <th> Description </th>
-        <th>  Date </th>
+        <th> User</th>
+        <th> Description</th>
+        <th> Date</th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${commentList.isEmpty()}">
-        <td colspan="2"> No Comments Available </td>
+        <td colspan="2"> No Comments Available</td>
     </tr>
     <tr th:each="comment : ${commentList}">
-        <td><span th:text="${comment.getUserDto().username}" > Title </span></td>
+        <td><span th:text="${comment.getUserDto().username}"> Title </span></td>
         <td><span th:text="${comment.getDescription()}"> Description </span></td>
-        <td><span th:text="${comment.getDateOfCreation()}"> Date </span></td>
+        <td><span th:text="${#temporals.format(comment.getDateOfCreation(), 'yyyy-MM-dd HH:mm:ss')}"> Date </span></td>
     </tr>
     </tbody>
 </table>
 <br>
 
 <div sec:authorize="isAuthenticated()">
-<form th:action="@{/event/__${id}__}" th:object="${commentDto}" method="post">
-    <table>
-        <tr>
-            <td>Comment:</td>
-            <td><input type="text" th:field="*{description}"/></td>
-            <td th:errors="*{description}"></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
+    <form th:action="@{/event/__${id}__}" method="post">
+        <table>
+            <tr>
+                <td>Comment:</td>
+                <td><input type="text" name="comment"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
+
+<div sec:authorize="isAuthenticated()" >
+    <form th:action="@{'/sign/' + ${event.getId()}}" method="post">
+        <button th:if="${isRegistered}" type="submit" name="sign" value="unsign">Wypisz się z tego wydarzenia</button>
+        <button th:unless="${isRegistered}" type="submit" name="sign" value="sign">Zapisz się na to wydarzenie</button>
+    </form>
+</div>
+
+
+<table class="table" th:object="${registeredUsersSet}">
+    <thead class="thead-light">
+    <tr>
+        <th> User</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${registeredUsersSet.isEmpty()}">
+        <td colspan="2"> There are no users currently registered for that event</td>
+    </tr>
+    <tr th:each="user : ${registeredUsersSet}">
+        <td><span th:text="${user.getUsername()}"> Registered Users: </span></td>
+    </tr>
+    </tbody>
+</table>
+
 
 <th:block th:replace="~{includes/CommonScripts :: end-of-body}"></th:block>
 </body>

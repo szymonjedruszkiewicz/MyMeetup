@@ -1,6 +1,7 @@
 package pl.sda.meetup.meetup.dto;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -15,8 +16,7 @@ import java.time.LocalDateTime;
 @ToString
 public class CommentDto {
 
-    @Min(10)
-    @Max(500)
+    @Length(max = 500)
     private String description;
 
     private UserDto userDto;
