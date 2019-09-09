@@ -18,5 +18,4 @@ public class SecurityBeanConfig {
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
-
 }

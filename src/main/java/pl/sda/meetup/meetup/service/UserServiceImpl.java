@@ -1,7 +1,6 @@
 package pl.sda.meetup.meetup.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.meetup.meetup.dto.UserDto;
 import pl.sda.meetup.meetup.exception.NoEventException;
@@ -59,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkIfIsRegistered(Long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("no user found in db"));
-        User user = userRepository.findUserByEmail(userContextService.getLoggedUserName()).orElseThrow(() -> new NoUserException("user not found in db"));
+        User user = userRepository.findUserByEmail(userContextService.getLoggedUserName()).orElseGet(User::new);
         return event.getRegisteredUsers().contains(user);
     }
 

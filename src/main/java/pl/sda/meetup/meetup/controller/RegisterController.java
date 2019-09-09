@@ -17,6 +17,7 @@ import javax.validation.Valid;
 @Controller
 public class RegisterController {
 
+    private static final String REGISTER_FORM = "registerForm";
     private final UserService userService;
 
     public RegisterController(UserService userService) {
@@ -26,24 +27,20 @@ public class RegisterController {
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
         model.addAttribute("userDto", new UserDto());
-        return "registerForm";
+        return REGISTER_FORM;
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "registerForm";
+            return REGISTER_FORM;
         }
-
         try {
             userService.save(userDto);
         } catch (UserExistsException e) {
             bindingResult.rejectValue("email", "700", e.getMessage());
-            return "registerForm";
+            return REGISTER_FORM;
         }
-
-
         return "redirect:/index";
-
     }
 }

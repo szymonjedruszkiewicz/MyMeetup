@@ -73,8 +73,6 @@ public class EventServiceImpl implements EventService {
             default:
                 throw new NoEventException("no such Events found in db");
         }
-
-
     }
 
     @Override
@@ -83,5 +81,10 @@ public class EventServiceImpl implements EventService {
         return manualEventMapper.eventToEventDto(event);
     }
 
-
+    @Override
+    public List<EventDto> findEventsByDates(LocalDate start, LocalDate end) {
+        return eventRepository.findEventsByStartIsAfterAndEndIsBefore(start, end).stream()
+                .map(manualEventMapper::eventToEventDto)
+                .collect(Collectors.toList());
+    }
 }

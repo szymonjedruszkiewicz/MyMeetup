@@ -53,7 +53,7 @@
 <br>
 
 <div sec:authorize="isAuthenticated()">
-    <form th:action="@{/event/__${id}__}" method="post">
+    <form th:action="@{/event/{id}(id=${id})}" method="post">
         <table>
             <tr>
                 <td>Comment:</td>
@@ -69,7 +69,7 @@
 </div>
 
 <div sec:authorize="isAuthenticated()" >
-    <form th:action="@{'/sign/' + ${event.getId()}}" method="post">
+    <form th:action="@{/sign/{id}(id=${event.getId()})}" method="post">
         <button th:if="${isRegistered}" type="submit" name="sign" value="unsign">Wypisz się z tego wydarzenia</button>
         <button th:unless="${isRegistered}" type="submit" name="sign" value="sign">Zapisz się na to wydarzenie</button>
     </form>

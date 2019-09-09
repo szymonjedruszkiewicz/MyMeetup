@@ -3,8 +3,6 @@ package pl.sda.meetup.meetup.dto;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Builder

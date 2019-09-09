@@ -2,6 +2,7 @@ package pl.sda.meetup.meetup.service;
 
 import pl.sda.meetup.meetup.dto.EventDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EventService {
@@ -13,6 +14,8 @@ public interface EventService {
     List<EventDto> getSearchResults(String query, String type);
 
     EventDto findEventById(Long id);
+
+    List<EventDto> findEventsByDates(LocalDate start, LocalDate end);
 
 
 

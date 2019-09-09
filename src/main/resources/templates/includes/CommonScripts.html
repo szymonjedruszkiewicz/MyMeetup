@@ -19,8 +19,8 @@
                 <li class="nav-item">
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/event/add">Add event</a>
                 </li>
-                <li>
-
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/logout">Logout</a>
                 </li>
                 <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
                     <!-- Search form -->
@@ -39,14 +39,10 @@
                 </form>
                 <li class="nav-item">
                     <span class="text-light" sec:authorize="isAuthenticated()" sec:authentication="name"></span>
-<!--                    <a th:if="${@userContextService.getLoggedUserName() != null}"-->
-<!--                       th:text="'zalogowany jako ' + ${@userContextService.getLoggedUserName()}" class="text-light"></a>-->
                 </li>
             </ul>
         </div>
     </nav>
-
-
 </th:block>
 
 

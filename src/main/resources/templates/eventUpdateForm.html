@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Form</title>
+    <div th:replace="includes/CommonScripts::head-css"></div>
+</head>
+<body>
+<div th:replace="includes/CommonScripts::header"></div>
+
+<h1>User update form</h1>
+
+<form th:action="@{/event/__${id}__/update}" th:object="${eventDto}" method="post">
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{title}"/></td>
+            <td th:errors="*{title}"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <td th:errors="*{description}"></td>
+        </tr>
+        <tr>
+            <td>Start time:</td>
+            <td><input type="text" th:field="*{start}" placeholder="yyyy/mm/dd"/></td>
+            <td th:errors="*{start}"></td>
+        </tr>
+        <tr>
+            <td>Finish time:</td>
+            <td><input type="text" th:field="*{end}" placeholder="yyyy/mm/dd"/></td>
+            <td th:errors="*{end}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<div th:replace="includes/CommonScripts::end-of-body"></div>
+</body>
+</html>

@@ -12,7 +12,7 @@
 <h1>Bieda Meetup says hello</h1>
 
 
-<table class="table" th:object="${events}" >
+<table class="table" >
     <thead class="thead-light">
     <tr>
         <th> Title </th>
@@ -30,13 +30,10 @@
         <td><span th:text="${event.getDescription()}"> Description </span></td>
         <td><span th:text="${event.getStart()}"> Start Date </span></td>
         <td><span th:text="${event.getEnd()}"> End Date </span></td>
-        <td><a th:href="@{'/event/' + ${event.getId()}}">show details</a></td>
-
+        <td><a th:href="@{/event/{id}(id=${event.getId()})}">show details</a></td>
     </tr>
     </tbody>
 </table>
-
-
 <th:block th:replace="~{includes/CommonScripts :: end-of-body}"> </th:block>
 </body>
 </html>

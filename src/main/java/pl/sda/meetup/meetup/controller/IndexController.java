@@ -20,4 +20,9 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/admin")
+    public String showAdminPage(){
+        return "adminPage";
+    }
+
 }
