@@ -20,15 +20,13 @@ public class CommentServiceImpl implements CommentService {
     private final ManualCommentMapper manualCommentMapper;
     private final UserContextService userContextService;
     private final UserService userService;
-    private final EventService eventService;
     private final EventRepository eventRepository;
 
-    public CommentServiceImpl(CommentRepository commentRepository, ManualCommentMapper manualCommentMapper, UserContextService userContextService, UserService userService, EventService eventService, EventRepository eventRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, ManualCommentMapper manualCommentMapper, UserContextService userContextService, UserService userService, EventRepository eventRepository) {
         this.commentRepository = commentRepository;
         this.manualCommentMapper = manualCommentMapper;
         this.userContextService = userContextService;
         this.userService = userService;
-        this.eventService = eventService;
         this.eventRepository = eventRepository;
     }
 
@@ -38,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void saveCommentSting(String comment, Long eventId) {
+    public void saveCommentString(String comment, Long eventId) {
         Comment commentToBeSaved = Comment.builder()
                 .user(userService.findUserByEmail(userContextService.getLoggedUserName()).orElseThrow(() -> new NoUserException("user not found in db")))
                 .dateOfCreation(LocalDateTime.now())

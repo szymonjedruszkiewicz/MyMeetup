@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Set<UserDto> listUsersRegisteredToEvent(Long eventId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("no user found in db"));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("No event of id: " + eventId + " found in database"));
         return event.getRegisteredUsers().stream()
                 .map(manualUserMapper::userToUserDto)
                 .collect(Collectors.toSet());
@@ -57,15 +57,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkIfIsRegistered(Long eventId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("no user found in db"));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("No event of id: \" + eventId + \" found in database"));
         User user = userRepository.findUserByEmail(userContextService.getLoggedUserName()).orElseGet(User::new);
         return event.getRegisteredUsers().contains(user);
     }
 
     @Override
     public boolean manageEventRegistration(String sign, Long eventId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("No event of id: " + eventId + " found in db"));
-        User user = userRepository.findUserByEmail(userContextService.getLoggedUserName()).orElseThrow(() -> new NoUserException("user not found in db"));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new NoEventException("No event of id: " + eventId + " found in database"));
+        User user = userRepository.findUserByEmail(userContextService.getLoggedUserName()).orElseThrow(() -> new NoUserException("user was not found in database"));
 
         switch (sign) {
             case "sign":

@@ -5,35 +5,34 @@
 
     <meta charset="UTF-8">
     <title>index</title>
-    <th:block th:replace="~{includes/CommonScripts :: head-css}"> </th:block>
+    <th:block th:replace="~{includes/CommonScripts :: head-css}"></th:block>
 </head>
 <body>
 <div th:replace="~{includes/CommonScripts::header}"></div>
-<h1>Bieda Meetup says hello</h1>
+<br>
+<h1 style="text-align: center">Welcome to my version of Meetup</h1>
+<br>
+<h2 style="text-align: center">List of current events:</h2>
 
 
-<table class="table" >
-    <thead class="thead-light">
-    <tr>
-        <th> Title </th>
-        <th> Description </th>
-        <th> Start Date </th>
-        <th> End Date </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${events.isEmpty()}">
-        <td colspan="2"> No Events Available </td>
-    </tr>
-    <tr th:each="event : ${events}">
-        <td><span th:text="${event.getTitle()}" > Title </span></td>
-        <td><span th:text="${event.getDescription()}"> Description </span></td>
-        <td><span th:text="${event.getStart()}"> Start Date </span></td>
-        <td><span th:text="${event.getEnd()}"> End Date </span></td>
-        <td><a th:href="@{/event/{id}(id=${event.getId()})}">show details</a></td>
-    </tr>
-    </tbody>
-</table>
-<th:block th:replace="~{includes/CommonScripts :: end-of-body}"> </th:block>
+<div class="container">
+    <div class="card-deck">
+        <div class="card mb-4" th:each="event : ${events}" style="min-width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${event.getTitle()}">Title</h4>
+                <p class="card-text" th:text="${event.getDescription()}">Desc</p>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="card-text" th:text="${event.getStart().toString()} + ' - ' + ${event.getEnd().toString()}">
+                    Start - end</p>
+                <a th:href="@{/event/{id}(id=${event.getId()})}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Show Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:replace="~{includes/CommonScripts :: end-of-body}"></th:block>
 </body>
 </html>
+

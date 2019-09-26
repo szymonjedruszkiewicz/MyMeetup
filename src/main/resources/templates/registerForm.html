@@ -4,34 +4,62 @@
     <meta charset="UTF-8">
     <title>Register Form</title>
     <div th:replace="includes/CommonScripts::head-css"></div>
+    <th:block th:replace="includes/CommonScripts::loginForm_css"></th:block>
+
+
 </head>
 <body>
 <div th:replace="includes/CommonScripts::header"></div>
 
-<form th:action="@{/register}" th:object="${userDto}" method="post">
-    <table>
-        <tr>
-            <td>Email:</td>
-            <td><input type="email" th:field="*{email}"/></td>
-            <td th:errors="*{email}"></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" th:field="*{password}"/></td>
-            <td th:errors="*{password}"></td>
-        </tr>
-        <tr>
-            <td>Username:</td>
-            <td><input type="text" th:field="*{username}"/></td>
-            <td th:errors="*{username}"></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
+
+<main class="login-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Register</div>
+                    <div class="card-body">
+                        <form th:action="@{/register}" th:object="${userDto}" method="post">
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
+                                    Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="email_address" class="form-control" th:field="*{email}"
+                                           required autofocus>
+                                    <span class="text-danger" th:errors="*{email}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" class="form-control" th:field="*{password}" required>
+                                    <span class="text-danger" th:errors="*{password}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="username" class="form-control" th:field="*{username}"
+                                           required autofocus>
+                                    <span class="text-danger" th:errors="*{username}"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 
 <div th:replace="includes/CommonScripts::end-of-body"></div>

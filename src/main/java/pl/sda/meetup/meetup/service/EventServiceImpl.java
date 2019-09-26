@@ -63,7 +63,7 @@ public class EventServiceImpl implements EventService {
                         .collect(Collectors.toList());
             case "current_and_future":
                 return queryResult.stream()
-                        .filter(event -> event.getStart().isBefore(LocalDate.now()) && !event.getEnd().isBefore(LocalDate.now()))
+                        .filter(event -> !event.getEnd().isBefore(LocalDate.now()))
                         .map(manualEventMapper::eventToEventDto)
                         .collect(Collectors.toList());
             case "all":

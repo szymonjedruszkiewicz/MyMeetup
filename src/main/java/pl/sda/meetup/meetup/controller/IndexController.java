@@ -14,7 +14,7 @@ public class IndexController {
         this.eventService = eventService;
     }
 
-    @GetMapping({"/index", "/"})
+    @GetMapping({"/index", "/",})
     public String showIndexPage(Model model) {
         model.addAttribute("events", eventService.getEventList());
         return "index";
@@ -23,6 +23,11 @@ public class IndexController {
     @GetMapping("/admin")
     public String showAdminPage(){
         return "adminPage";
+    }
+
+    @GetMapping("/error403")
+    public String showErrorPage(){
+        return "error403";
     }
 
 }

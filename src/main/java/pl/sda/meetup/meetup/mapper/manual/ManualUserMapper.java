@@ -3,6 +3,7 @@ package pl.sda.meetup.meetup.mapper.manual;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.sda.meetup.meetup.dto.UserDto;
+import pl.sda.meetup.meetup.exception.NoUserException;
 import pl.sda.meetup.meetup.model.Role;
 import pl.sda.meetup.meetup.model.User;
 import pl.sda.meetup.meetup.repository.RoleRepository;
@@ -24,19 +25,27 @@ public class ManualUserMapper {
 
 
     public User userDtoToUser(UserDto userLoginDto) {
-        Optional<Role> user = roleRepository.findByRoleName("user");
-        Set<Role> roleSet = new HashSet<>();
-        user.ifPresent(roleSet::add);
+        if (userLoginDto == null) {
+            throw new NoUserException("userDto to map is null");
+        } else {
 
-        return User.builder()
-                .email(userLoginDto.getEmail())
-                .username(userLoginDto.getUsername())
-                .passwordHash(passwordEncoder.encode(userLoginDto.getPassword()))
-                .roles(roleSet)
-                .build();
+            Optional<Role> user = roleRepository.findByRoleName("user");
+            Set<Role> roleSet = new HashSet<>();
+            user.ifPresent(roleSet::add);
+
+            return User.builder()
+                    .email(userLoginDto.getEmail())
+                    .username(userLoginDto.getUsername())
+                    .passwordHash(passwordEncoder.encode(userLoginDto.getPassword()))
+                    .roles(roleSet)
+                    .build();
+        }
     }
 
     public UserDto userToUserDto(User user) {
+        if (user == null) {
+            throw new NoUserException("user to map is null");
+        }
         return UserDto.builder()
                 .email(user.getEmail())
                 .username(user.getUsername())

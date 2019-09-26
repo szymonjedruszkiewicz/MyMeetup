@@ -61,7 +61,7 @@ public class EventController {
     }
 
     @GetMapping("/search")
-    public String showSearchResults(@RequestParam(value = "q", required = false) String query, @RequestParam(value = "type", required = false)
+    public String showSearchResults(@RequestParam(value = "q") String query, @RequestParam(value = "type")
             String type, Model model) {
 
         List<EventDto> searchResults = eventService.getSearchResults(query, type);
@@ -79,13 +79,12 @@ public class EventController {
         model.addAttribute("event", eventService.findEventById(Long.valueOf(id)));
         model.addAttribute("id", id);
         model.addAttribute("commentList", commentService.getCommentByEvent(Long.valueOf(id)));
-
         return "eventDetails";
     }
 
     @PostMapping("/event/{id}")
     public String postComment(@PathVariable String id, @RequestParam(name = "comment") String comment) {
-        commentService.saveCommentSting(comment, Long.valueOf(id));
+        commentService.saveCommentString(comment, Long.valueOf(id));
         return "redirect:/event/" + id;
     }
 
