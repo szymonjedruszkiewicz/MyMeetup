@@ -28,11 +28,11 @@ public class EventDto {
 
     private UserDto userDto;
 
-    @Future(message = "wrong date")
+    @Future
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate start;
 
-    @Future(message = "wrong date")
+    @Future
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate end;
 }

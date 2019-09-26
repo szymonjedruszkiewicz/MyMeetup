@@ -10,27 +10,23 @@
 <body>
 <div th:replace="~{includes/CommonScripts::header}"></div>
 
-<table class="table" th:object="${results}" >
-    <thead class="thead-light">
-    <tr>
-        <th> Title </th>
-        <th> Description </th>
-        <th> Start Date </th>
-        <th> End Date </th>
-    </tr>
-    </thead>
-      <tbody>
-    <tr th:if="${results.isEmpty()}">
-        <td colspan="2"> No Events Available </td>
-    </tr>
-    <tr th:each="event : ${results}">
-        <td><span th:text="${event.getTitle()}"> Title </span></td>
-        <td><span th:text="${event.getDescription()}"> Description </span></td>
-        <td><span th:text="${event.getStart()}"> Start Date </span></td>
-        <td><span th:text="${event.getEnd()}"> End Date </span></td>
-    </tr>
-    </tbody>
-</table>
+
+
+<div class="container">
+    <div class="card-deck">
+        <div class="card mb-4" th:each="event : ${results}" style="min-width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${event.getTitle()}">Title</h4>
+                <p class="card-text" th:text="${event.getDescription()}">Desc</p>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="card-text" th:text="${event.getStart().toString()} + ' - ' + ${event.getEnd().toString()}">
+                    Start - end</p>
+                <a th:href="@{/event/{id}(id=${event.getId()})}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Show Details</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <th:block th:replace="~{includes/CommonScripts :: end-of-body}"> </th:block>

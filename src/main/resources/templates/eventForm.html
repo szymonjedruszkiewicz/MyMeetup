@@ -4,39 +4,102 @@
     <meta charset="UTF-8">
     <title>Event Form</title>
     <div th:replace="includes/CommonScripts::head-css"></div>
+
+    <th:block th:replace="includes/CommonScripts :: eventForm_css"></th:block>
 </head>
 <body>
 <div th:replace="includes/CommonScripts::header"></div>
 
-<form th:action="@{/event/add}" th:object="${eventDto}" method="post">
-    <table>
-        <tr>
-            <td>Title:</td>
-            <td><input type="text" th:field="*{title}"/></td>
-            <td th:errors="*{title}"></td>
-        </tr>
-        <tr>
-            <td>Description:</td>
-            <td><input type="text" th:field="*{description}"/></td>
-            <td th:errors="*{description}"></td>
-        </tr>
-        <tr>
-            <td>Start time:</td>
-            <td><input type="text" th:field="*{start}" placeholder="yyyy/mm/dd"/></td>
-            <td th:errors="*{start}"></td>
-        </tr>
-        <tr>
-            <td>Finish time:</td>
-            <td><input type="text" th:field="*{end}" placeholder="yyyy/mm/dd"/></td>
-            <td th:errors="*{end}"></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
+
+
+<main class="login-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Add event</div>
+                    <div class="card-body">
+                        <form th:action="@{/event/add}" th:object="${eventDto}" method="post">
+                            <div class="form-group row">
+                                <label for="event_title" class="col-md-4 col-form-label text-md-right">Title</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="event_title" class="form-control" th:field="*{title}"
+                                           required autofocus>
+                                    <span class="text-danger" th:errors="*{title}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                                <div class="col-md-6">
+                                    <textarea id="description" class="form-control" rows="5" th:field="*{description}" required autofocus></textarea>
+                                    <span class="text-danger" th:errors="*{description}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="start_date" class="col-md-4 col-form-label text-md-right">Starting Date</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="start_date" class="form-control" th:field="*{start}" placeholder="yyyy/mm/dd"
+                                           required autofocus>
+                                    <span class="text-danger" th:errors="*{start}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="end_date" class="col-md-4 col-form-label text-md-right">Ending Date</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="end_date" class="form-control" th:field="*{end}"  placeholder="yyyy/mm/dd"
+                                           required autofocus>
+                                    <span class="text-danger" th:errors="*{end}"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Add Event
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<!--<form th:action="@{/event/add}" th:object="${eventDto}" method="post">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>Title:</td>-->
+<!--            <td><input type="text" th:field="*{title}"/></td>-->
+<!--            <td th:errors="*{title}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Description:</td>-->
+<!--            <td><input type="text" th:field="*{description}"/></td>-->
+<!--            <td th:errors="*{description}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Start time:</td>-->
+<!--            <td><input type="text" th:field="*{start}" placeholder="yyyy/mm/dd"/></td>-->
+<!--            <td th:errors="*{start}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Finish time:</td>-->
+<!--            <td><input type="text" th:field="*{end}" placeholder="yyyy/mm/dd"/></td>-->
+<!--            <td th:errors="*{end}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <button type="submit">Submit</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
 
 
 <div th:replace="includes/CommonScripts::end-of-body"></div>

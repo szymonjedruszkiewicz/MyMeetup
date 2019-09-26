@@ -8,7 +8,7 @@ public interface CommentService {
 
     void saveComment(CommentDto commentDto);
 
-    void saveCommentSting(String comment, Long eventId);
+    void saveCommentString(String comment, Long eventId);
 
     List<CommentDto> getCommentByEvent(Long eventId);
 }

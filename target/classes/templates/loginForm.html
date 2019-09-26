@@ -4,29 +4,52 @@
     <meta charset="UTF-8">
     <title>Login Form</title>
     <th:block th:replace="includes/CommonScripts::head-css"></th:block>
+    <th:block th:replace="includes/CommonScripts::loginForm_css"></th:block>
+
+
 
 </head>
 <body>
 <th:block th:replace="includes/CommonScripts::header"></th:block>
 
-<form th:action="@{/login-process-2}" method="post">
-    <table>
-        <tr>
-            <td>Email:</td>
-            <td><input type="text" th:name="email"/></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" th:name="password"/></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
 
+<main class="login-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Login</div>
+                    <div class="card-body">
+                        <form th:action="@{/login-process-2}" method="post">
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
+                                    Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="email_address" class="form-control" name="email"
+                                           required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" class="form-control" name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 <th:block th:replace="includes/CommonScripts::end-of-body"></th:block>
 </body>
