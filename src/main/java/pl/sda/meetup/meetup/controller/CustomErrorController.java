@@ -26,20 +26,20 @@ public class CustomErrorController implements ErrorController {
 
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
                 log.info("User " + auth.getName() + " attempted to access resource not found on server");
-                return "/errors/error404";
+                return "errors/error404";
             }
 
             if (statusCode == HttpStatus.FORBIDDEN.value()){
                 log.info("User " + auth.getName() + " attempted to access restricted page");
-                return "/errors/error403";
+                return "errors/error403";
             }
         }
         log.info("Handling general error");
-        return "error";
+        return "errors/error";
     }
 
     @Override
     public String getErrorPath() {
-        return "/errors/error";
+        return "errors/error";
     }
 }
