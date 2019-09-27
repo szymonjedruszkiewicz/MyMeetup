@@ -35,7 +35,7 @@ public class CustomErrorController implements ErrorController {
             }
         }
         log.info("Handling general error");
-        return "error";
+        return "/errors/error";
     }
 
     @Override
