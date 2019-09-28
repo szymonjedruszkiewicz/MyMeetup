@@ -12,7 +12,7 @@ import pl.sda.meetup.meetup.exception.NoUserException;
 @Slf4j
 @ControllerAdvice
 public class HandlingExceptionController {
-    private static final String NOT_FOUND_VIEW = "/errors/error404";
+    private static final String NOT_FOUND_VIEW = "errors/error404";
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NumberFormatException.class)
@@ -20,7 +20,7 @@ public class HandlingExceptionController {
         log.error("Handling Number Format Exception");
         log.error(exception.getMessage());
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("errors/error400");
+        modelAndView.setViewName("errors/error");
         modelAndView.addObject("exception", exception);
         return modelAndView;
     }
